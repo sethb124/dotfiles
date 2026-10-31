@@ -1,0 +1,4 @@
+scripts/mac
+
+nushell/.config/history.*
+nushell/.config/nushell/plugin.msgpackz

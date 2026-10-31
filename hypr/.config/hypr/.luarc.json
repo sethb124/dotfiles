@@ -1,0 +1,16 @@
+{
+  "workspace": {
+    "library": [
+      "/usr/share/hypr/stubs"
+    ]
+  },
+    "diagnostics.globals": [
+        "terminal",
+        "menu",
+        "browser",
+        "discordClient",
+        "discordWithArgs",
+        "scripts",
+        "mainMod"
+    ]
+}

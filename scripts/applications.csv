@@ -1,0 +1,20 @@
+name,cmd,terminal
+Bolt Launcher,bolt,false
+Btop,btop,true
+Chromium,chromium,false
+Cmus,cmus,true
+Dolphin,dolphin,false
+Firefox Nightly,firefox-nightly,false
+Gimp,gimp,false
+Kitty,kitty,false
+Neovim,nvim,true
+Nicotine+,nicotine,false
+Nwg-Look,nwg-look,false
+OBS,obs,false
+Pinta,pinta,false
+Seahorse,seahorse,false
+Spotify,spotify --ozone-platform=wayland,false
+Steam,steam,false
+Stremio,flatpak run com.stremio.Stremio,false
+Yazi,yazi,true
+Zen,zen-browser,false

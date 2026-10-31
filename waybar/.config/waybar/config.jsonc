@@ -1,0 +1,116 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", // Waybar at top layer
+    // "position": "bottom",
+    "height": 30,
+    // "width": 1280, // Waybar width
+    "spacing": -5,
+    // Choose the order of the modules
+    "modules-left": [
+        "custom/osname",
+        "hyprland/workspaces"
+        // "ext/workspaces"
+        // "hyprland/submap"
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "backlight",
+        "battery",
+        "power-profiles-daemon",
+        "clock"
+    ],
+    "hyprland/workspaces": {
+        "spacing": 0,
+        "rotate": 0,
+        "all-outputs": true
+    },
+    "hyprland/submap": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "interval": 60,
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "format": "{:%m/%d/%y %I:%M %p}",
+        "format-alt": "{:%m/%d/%y}"
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "interval": 1,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "󱓞",
+        "performance": "󱓞",
+        "balanced": "",
+        "power-saver": ""
+      }
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        // "format-wifi": "  {signalStrength}%",
+        // "format-wifi": "",
+        "format-wifi": "",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        // "format": "{volume}% {icon} {format_source}",
+        "format": "{icon} \u2009{volume}%",
+        // "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{icon} \u2009{volume}%",
+        // "format-bluetooth-muted": "{icon}",
+        "format-muted": " ",
+        // "format-source": "{volume}% ",
+        // "format-source-muted": "",
+        "format-icons": {
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/osname": {
+        "format": "<span color=\"#3685D0\">󰣇</span>"
+    },
+    "hyprland/window": {
+        // "icon": true
+        "rewrite": {
+            "(.*) \u2014 Firefox Nightly": "$1",
+            "(.*) \u2014 Zen Browser": "$1"
+        }
+    }
+}
