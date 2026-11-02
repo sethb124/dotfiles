@@ -66,6 +66,17 @@ vim.opt.expandtab = true
 
 vim.g.c_syntax_for_h = 1
 
+vim.filetype.add {
+  extension = {
+    thy = 'isabelle',
+  },
+  on_detect = function(buf, filetype)
+    if filetype == 'isabelle' then
+      vim.bo[buf].commentstring = '(* %s *)'
+    end
+  end,
+}
+
 -- vim.diagnostic.config { virtual_lines = true }
 
 -- vim.g.terminal_emulator = 'xterm-kitty'

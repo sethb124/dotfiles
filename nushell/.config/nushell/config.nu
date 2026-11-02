@@ -25,7 +25,7 @@ alias zen = zen-browser
 alias o = xdg-open
 def hy [] {
   cd ~/.config/hypr
-  run-external $env.EDITOR hyprland.lua
+  ^$env.EDITOR hyprland.lua
 }
 
 mkdir ($nu.data-dir | path join 'vendor/autoload')

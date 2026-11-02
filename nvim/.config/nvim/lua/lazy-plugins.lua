@@ -23,7 +23,16 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      pre_hook = function()
+        if vim.bo.filetype == 'isabelle' then
+          return vim.bo.commentstring
+        end
+      end,
+    },
+  },
 
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua

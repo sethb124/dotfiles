@@ -2,7 +2,7 @@
 main='#C50ED2'
 text='#EBFAFA'
 bg='#000000'
-exec bemenu -ciwC -B 2 -W 0.4 -l 26 -p open --single-instance \
+exec bemenu -ciwC -B 2 -W 0.4 -l 26 --single-instance \
     --fn 'FiraCode Nerd Font 10' \
     --bdr $main --tf $main --hf $main \
     --ff $text --cf $text --nf $text --af $text \

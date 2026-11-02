@@ -1,20 +1,14 @@
 #!/bin/nu
-use std/iter
 let apps = (
   const csv = path self ./applications.csv;
   open $csv | update terminal {into bool}
 )
-let files = ls -as ~
-  | get name
-  | where $it starts-with .
-  | where $it not-in [.config .dotfiles]
-  | iter intersperse '-E'
-  | let excludes
-  | fd -H -t f -C ~ -E ...$excludes
+let files = fd -t f -C ~ . . .dotfiles
+  | sed 's|^\./||'
   | LC_ALL=C ^sort -f
   | lines
-const bemenu = path self bemenu
-let input = $apps.name ++ $files | to text | run-external $bemenu
+const menu = path self bemenu
+let input = $apps.name ++ $files | to text | ^$menu -p open
 if $input not-in $apps.name {
   # fails on terminal applications
   # not sure how to fix right now

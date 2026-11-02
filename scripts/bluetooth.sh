@@ -12,6 +12,7 @@ if ! bluetoothctl devices Connected | grep -q "$mac"; then
     bluetoothctl connect "$mac"
     # wait for device to pair
     until bluetoothctl devices Connected | grep -q "$mac"; do sleep 1; done
+    sleep 1
     # adjust volume to the nearest 5
     volume=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | cut -d ' ' -f 2)
     wpctl set-volume @DEFAULT_AUDIO_SINK@ "$(bc <<<"$volume % .05")-"
