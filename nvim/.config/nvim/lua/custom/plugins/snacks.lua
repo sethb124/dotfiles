@@ -34,6 +34,11 @@ return {
     statuscolumn = { enabled = true },
     terminal = { enabled = true },
     words = { enabled = true },
+    styles = {
+      notification = {
+        border = 'single',
+      },
+    },
   },
   keys = {
     {

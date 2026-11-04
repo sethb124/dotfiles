@@ -14,9 +14,24 @@ return {
     presets = {
       long_message_to_split = true, -- long messages will be sent to a split
       inc_rename = false, -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = false, -- add a border to hover docs and signature help
+      lsp_doc_border = true, -- add a border to hover docs and signature help
     },
     views = {
+      notify = {
+        border = {
+          style = 'single',
+        },
+      },
+      popup = {
+        border = {
+          style = 'single',
+        },
+      },
+      cmdline_input = {
+        border = {
+          style = 'single',
+        },
+      },
       cmdline_popup = {
         position = {
           row = 16,
@@ -29,6 +44,11 @@ return {
         border = {
           style = 'single',
           padding = { 0, 1 },
+        },
+      },
+      hover = {
+        border = {
+          style = 'single',
         },
       },
       popupmenu = {
@@ -45,22 +65,11 @@ return {
           style = 'single',
           padding = { 0, 1 },
         },
-        win_options = {
-          winhighlight = {
-            Normal = 'Normal',
-            FloatBorder = 'DiagnosticInfo',
-          },
-        },
-      },
-      cmdline_input = {
-        border = {
-          style = 'single',
-        },
       },
     },
     routes = {
       {
-        view = 'notify',
+        view = 'popup',
         filter = {
           event = 'msg_show',
           kind = 'shell_out',
@@ -70,5 +79,6 @@ return {
   },
   dependencies = {
     'MunifTanjim/nui.nvim',
+    -- 'rcarriga/nvim-notify',
   },
 }

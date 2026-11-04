@@ -22,43 +22,46 @@ hl.window_rule {
 -- Special workspaces
 hl.config { misc = { close_special_on_empty = false } }
 
--- discord
-hl.workspace_rule {
-  workspace = 'special:discord',
-  on_created_empty = discordWithArgs,
-}
-hl.window_rule {
-  match = {
+local special = {
+  discord = {
+    exec = discordWithArgs,
     class = discordClient,
+    toggle = mainMod .. '+ D',
   },
-  workspace = 'special:discord silent',
+  spotify = {
+    exec = 'spotify --ozone-platform=wayland',
+    class = 'Spotify',
+    toggle = mainMod .. '+ S',
+  },
+  runelite = {
+    exec = 'bolt',
+    class = 'bolt-launcher',
+    toggle = mainMod .. '+ A',
+  },
 }
-hl.bind(mainMod .. ' + D', hl.dsp.workspace.toggle_special 'discord')
 
--- spotify
-hl.workspace_rule {
-  workspace = 'special:spotify',
-  on_created_empty = 'spotify --ozone-platform=wayland',
-}
-hl.window_rule {
-  match = {
-    class = 'spotify',
-  },
-  workspace = 'special:spotify silent',
-}
-hl.bind(mainMod .. ' + S', hl.dsp.workspace.toggle_special 'spotify')
+-- create basic workspace and window rules for special workspaces
+for name, ws in pairs(special) do
+  hl.workspace_rule {
+    workspace = 'special:' .. name,
+  }
+  hl.window_rule {
+    match = {
+      class = ws.class,
+    },
+    workspace = 'special:' .. name .. ' silent',
+  }
+  hl.bind(ws.toggle, hl.dsp.workspace.toggle_special(name))
+end
 
--- runelite
-hl.workspace_rule {
-  workspace = 'special:runelite',
-  on_created_empty = 'bolt',
-}
-hl.window_rule {
-  match = {
-    title = 'Bolt Launcher',
-  },
-  workspace = 'special:runelite silent',
-}
+-- create special workspace application if workspace is empty
+hl.on('workspace.created', function(ws)
+  if ws.special and ws.is_empty then
+    hl.exec_cmd(special[ws.name:match '^special:(.*)'].exec)
+  end
+end)
+
+-- extra runelite rules
 hl.window_rule {
   match = {
     class = 'net-runelite-client-RuneLite',
@@ -81,4 +84,3 @@ hl.window_rule {
   },
   no_initial_focus = true,
 }
-hl.bind(mainMod .. ' + A', hl.dsp.workspace.toggle_special 'runelite')

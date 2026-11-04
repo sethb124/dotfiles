@@ -346,6 +346,9 @@ return vim.list_extend(snippets, {
   a({ trig = '%^([^{][^%s%(%)%[%]%{%}%.%,]+)', wordTrig = false, regTrig = true }, fmta('^{<><>}', { l(l.CAPTURE1), i(1) }), { condition = math }),
   a({ trig = '(%a)(%d)', wordTrig = false, regTrig = true }, { l(l.CAPTURE1 .. '_' .. l.CAPTURE2) }, { condition = math }),
 
+  -- regular snippet, not auto
+  s({ trig = '%?(.*)', wordTrig = false, regTrig = true, priority = 1e6 }, l(l.CAPTURE1), { condition = math }),
+  -- triggers on a space
   a({ trig = '%?(.* )', wordTrig = false, regTrig = true, priority = 1e6 }, l(l.CAPTURE1), { condition = math }),
   a({ trig = '(%?.+)', wordTrig = false, regTrig = true, priority = 1e6 }, l(l.CAPTURE1), { condition = math }),
 })
