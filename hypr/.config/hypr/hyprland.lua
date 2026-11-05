@@ -6,7 +6,7 @@ hl.monitor {
 }
 
 mainMod = 'SUPER'
-scripts = '~/.dotfiles/scripts'
+scripts = '~/dotfiles/scripts'
 terminal = 'kitty'
 menu = scripts .. '/bemenu.nu'
 browser = 'zen-browser'

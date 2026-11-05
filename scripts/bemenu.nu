@@ -3,8 +3,7 @@ let apps = (
   const csv = path self ./applications.csv;
   open $csv | update terminal {into bool}
 )
-let files = fd -t f -C ~ . . .dotfiles
-  | sed 's|^\./||'
+let files = fd -t f -C ~ .
   | LC_ALL=C ^sort -f
   | lines
 const menu = path self bemenu
