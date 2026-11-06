@@ -48,7 +48,8 @@ return {
       },
       hover = {
         border = {
-          style = 'single',
+          -- style = 'single',
+          style = 'none',
         },
       },
       popupmenu = {

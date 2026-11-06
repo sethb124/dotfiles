@@ -192,8 +192,8 @@ return {
               Layout.Box({
                 Layout.Box(results, { grow = 1 }),
                 Layout.Box(prompt, { size = 3 }),
-              }, { dir = 'col', size = '55%' }),
-              Layout.Box(preview, { size = '45%' }),
+              }, { dir = 'col', size = '50%' }),
+              Layout.Box(preview, { size = '50%' }),
             }, { dir = 'row' }),
             minimal = Layout.Box({
               Layout.Box(results, { grow = 1 }),
@@ -296,9 +296,9 @@ return {
     end, { desc = '[S]earch [/] in Open Files' })
 
     -- Shortcut for searching your Neovim configuration files
-    vim.keymap.set('n', '<leader>sn', function()
+    vim.keymap.set('n', '<leader>sc', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = '[S]earch [N]eovim files' })
+    end, { desc = '[S]earch [C]onfig files' })
   end,
 }
 -- vim: ts=2 sts=2 sw=2 et

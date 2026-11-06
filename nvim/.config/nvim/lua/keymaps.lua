@@ -50,28 +50,20 @@ vim.keymap.set('n', '<C-s>', '<Cmd>update<CR>')
 vim.keymap.set('i', '<C-s>', '<Esc><Cmd>update<CR>')
 
 vim.keymap.set('n', 'j', function()
-  if vim.v.count == 0 then
-    return 'gj'
-  else
-    return 'j'
-  end
+  return vim.v.count == 0 and 'gj' or 'j'
 end, { expr = true })
 vim.keymap.set('n', 'k', function()
-  if vim.v.count == 0 then
-    return 'gk'
-  else
-    return 'k'
-  end
+  return vim.v.count == 0 and 'gk' or 'k'
 end, { expr = true })
 
-vim.keymap.set('n', '<Leader>x', '<Cmd>bd<CR>')
+vim.keymap.set('n', '<Leader>x', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
 
-vim.keymap.set(
-  'n',
-  '<Leader>L',
-  '<Cmd>lua require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"})<CR>',
-  { desc = 'Reload LuaSnip snippets' }
-)
+vim.keymap.set('n', '<Leader>rl', function()
+  require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/LuaSnip/' }
+end, { desc = '[R]eload [L]uaSnip Snippets' })
+vim.keymap.set('n', '<Leader>n', function()
+  Snacks.notifier.show_history()
+end, { desc = 'Show [N]otification History' })
 
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
@@ -83,5 +75,6 @@ vim.api.nvim_create_user_command('ReloadSession', function()
   local tmp = '/tmp/Session.vim'
   vim.cmd('mksession! ' .. tmp .. ' | restart source ' .. tmp)
 end, {})
+vim.keymap.set('n', '<Leader>rs', '<Cmd>ReloadSession<CR>', { desc = '[R]eload Session' })
 
 -- vim: ts=2 sts=2 sw=2 et

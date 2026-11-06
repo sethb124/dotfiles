@@ -10,36 +10,32 @@ return {
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim', opts = {} },
 
-    -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
+    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
-    { 'folke/lazydev.nvim', opts = {} },
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      opts = {
+        library = {
+          -- See the configuration section for more details
+          -- Load luvit types when the `vim.uv` word is found
+          { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+          { path = 'snacks.nvim', words = { 'Snacks' } },
+        },
+      },
+    },
+    { -- optional cmp completion source for require statements and module annotations
+      'hrsh7th/nvim-cmp',
+      opts = function(_, opts)
+        opts.sources = opts.sources or {}
+        table.insert(opts.sources, {
+          name = 'lazydev',
+          group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+        })
+      end,
+    },
   },
   config = function()
-    -- Brief aside: **What is LSP?**
-    --
-    -- LSP is an initialism you've probably heard, but might not understand what it is.
-    --
-    -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-    -- and language tooling communicate in a standardized fashion.
-    --
-    -- In general, you have a "server" which is some tool built to understand a particular
-    -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-    -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-    -- processes that communicate with some "client" - in this case, Neovim!
-    --
-    -- LSP provides Neovim with features like:
-    --  - Go to definition
-    --  - Find references
-    --  - Autocompletion
-    --  - Symbol Search
-    --  - and more!
-    --
-    -- Thus, Language Servers are external tools that must be installed separately from
-    -- Neovim. This is where `mason` and related plugins come into play.
-    --
-    -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-    -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
     --  This function gets run when an LSP attaches to a particular buffer.
     --    That is to say, every time a new file is opened that is associated with
     --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -191,32 +187,6 @@ return {
       --   filetypes = { 'haskell', 'lhaskell', 'cabal' },
       --   mason = false,
       -- },
-      -- jdtls = {},
-      -- rust_analyzer = {
-      --   on_attach = function(client, bufnr)
-      --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-      --   end,
-      --   settings = {
-      --     ['rust-analyzer'] = {
-      --       imports = {
-      --         granularity = {
-      --           group = 'module',
-      --         },
-      --         prefix = 'self',
-      --       },
-      --       cargo = {
-      --         buildScripts = {
-      --           enable = true,
-      --         },
-      --       },
-      --       procMacro = {
-      --         enable = true,
-      --       },
-      --     },
-      --   },
-      -- },
-
-      -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
     }
 
     -- Ensure the servers and tools above are installed
