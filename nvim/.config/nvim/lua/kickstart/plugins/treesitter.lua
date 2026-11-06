@@ -56,6 +56,18 @@ return {
         end
       end,
     })
+    vim.api.nvim_create_autocmd('User', {
+      pattern = 'TSUpdate',
+      callback = function()
+        require('nvim-treesitter.parsers').dafny = {
+          install_info = {
+            url = 'https://github.com/oscar-bender-stone/tree-sitter-dafny',
+            -- -- optional entries:
+            queries = 'queries/helix', -- also install queries from given directory
+          },
+        }
+      end,
+    })
   end,
 }
 -- vim: ts=2 sts=2 sw=2 et

@@ -24,16 +24,6 @@ return {
         },
       },
     },
-    { -- optional cmp completion source for require statements and module annotations
-      'hrsh7th/nvim-cmp',
-      opts = function(_, opts)
-        opts.sources = opts.sources or {}
-        table.insert(opts.sources, {
-          name = 'lazydev',
-          group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-        })
-      end,
-    },
   },
   config = function()
     --  This function gets run when an LSP attaches to a particular buffer.
@@ -165,9 +155,6 @@ return {
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
       lua_ls = {
-        -- cmd = {...},
-        -- filetypes = { ...},
-        -- capabilities = {},
         settings = {
           Lua = {
             completion = {
@@ -183,10 +170,38 @@ return {
       },
       gopls = {},
       pyright = {},
-      -- hls = {
-      --   filetypes = { 'haskell', 'lhaskell', 'cabal' },
-      --   mason = false,
-      -- },
+      hls = {
+        filetypes = { 'haskell', 'lhaskell' },
+        settings = {
+          haskell = {
+            formattingProvider = 'fourmolu',
+            cabalFormattingProvider = 'cabalfmt',
+          },
+        },
+      },
+      ocamllsp = {
+        cmd = { 'ocamllsp' },
+        filetypes = {
+          'ocaml',
+          'ocaml.interface',
+          'ocaml.menhir',
+          'ocaml.ocamllex',
+          'dune',
+          'reason',
+        },
+        root_markers = {
+          { 'dune-project', 'dune-workspace' },
+          { '*.opam', 'esy.json', 'package.json' },
+          '.git',
+        },
+        settings = {},
+      },
+      zls = {
+        cmd = { 'zls' },
+        filetypes = { 'zig' },
+      },
+      nushell = {},
+      dafny = {},
     }
 
     -- Ensure the servers and tools above are installed
@@ -204,26 +219,14 @@ return {
       'stylua', -- Used to format Lua code
       'autopep8',
       'isort',
-      -- 'tex-fmt',
       'latexindent',
-      -- 'haskell-language-server',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    require('mason-lspconfig').setup {
-      ensure_installed = {},
-      automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
-        end,
-      },
-    }
+    for name, server in pairs(servers) do
+      vim.lsp.config(name, server)
+      vim.lsp.enable(name)
+    end
   end,
 }
 -- vim: ts=2 sts=2 sw=2 et
