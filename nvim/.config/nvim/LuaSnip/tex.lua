@@ -177,6 +177,7 @@ return vim.list_extend(snippets, {
   a('se', t '\\subseteq', { condition = math }),
   a('sn', t '\\subsetneq', { condition = math }),
   a('pr', t '\\sqsubseteq', { condition = math }),
+  a('pn', t '\\sqsubsetneq', { condition = math }),
   a('sp', t '\\supset', { condition = math }),
   a('pe', t '\\supseteq', { condition = math }),
   a('~=', t '\\cong', { condition = math }),
@@ -291,6 +292,8 @@ return vim.list_extend(snippets, {
   }, fmta("``<>''", i(1)), { condition = -math }),
   a('`', fmta("`<>'", i(1)), { condition = -math }),
 
+  a('xc', t '\\mathbf{C}', { condition = math }),
+
   -- blackboard bold
   a('bb', fmta('\\mathbb{<>}', d(1, get_visual)), { condition = math }),
   a(
@@ -342,8 +345,8 @@ return vim.list_extend(snippets, {
   -- misc.
   a('qed', t '\\hfill $\\blacksquare$', { condition = -math }),
 
-  a({ trig = '%_([^{][^%s%(%)%[%]%{%}%.%,%^]+)', wordTrig = false, regTrig = true }, fmta('_{<><>}', { l(l.CAPTURE1), i(1) }), { condition = math }),
-  a({ trig = '%^([^{][^%s%(%)%[%]%{%}%.%,]+)', wordTrig = false, regTrig = true }, fmta('^{<><>}', { l(l.CAPTURE1), i(1) }), { condition = math }),
+  a({ trig = '%_([^{\\][^%s%(%)%[%]%{%}%.%,%^]+)', wordTrig = false, regTrig = true }, fmta('_{<><>}', { l(l.CAPTURE1), i(1) }), { condition = math }),
+  a({ trig = '%^([^{\\][^%s%(%)%[%]%{%}%.%,]+)', wordTrig = false, regTrig = true }, fmta('^{<><>}', { l(l.CAPTURE1), i(1) }), { condition = math }),
   a({ trig = '(%a)(%d)', wordTrig = false, regTrig = true }, { l(l.CAPTURE1 .. '_' .. l.CAPTURE2) }, { condition = math }),
 
   -- regular snippet, not auto

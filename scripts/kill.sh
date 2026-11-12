@@ -1,9 +1,9 @@
 #!/bin/bash
 set -ex
-input=$(ps -U seth -o ucmd |
+input=$(ps -U $(id --user) -o ucmd |
     sort |
     uniq |
-    ~/.dotfiles/scripts/bemenu -p kill)
+    ~/dotfiles/scripts/bemenu -p kill)
 if [[ -n $input ]]; then
-    killall "$input"
+    pkill -x "$input"
 fi

@@ -10,12 +10,16 @@ hl.bind(
   hl.dsp.window.fullscreen { mode = 'maximized', action = 'toggle' }
 )
 hl.bind(mainMod .. ' + R', hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. ' + SHIFT + R', hl.dsp.exec_cmd 'wlogout')
 hl.bind(mainMod .. ' + E', hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. ' + B', hl.dsp.exec_cmd(terminal .. ' btop'))
 hl.bind(mainMod .. ' + H', hl.dsp.exec_cmd(scripts .. '/bluetooth.sh'))
 hl.bind(mainMod .. ' + X', hl.dsp.exec_cmd(scripts .. '/kill.sh'))
 
-hl.bind('PRINT', hl.dsp.exec_cmd 'hyprshot --clipboard-only -m window')
+hl.bind(
+  'PRINT',
+  hl.dsp.exec_cmd 'hyprshot --clipboard-only -m window -m active'
+)
 hl.bind('SHIFT + PRINT', hl.dsp.exec_cmd 'hyprshot --clipboard-only -m region')
 hl.bind(mainMod .. ' + PRINT', function()
   hl.dispatch(
@@ -25,7 +29,10 @@ hl.bind(mainMod .. ' + PRINT', function()
   )
 end)
 hl.bind(mainMod .. ' + L', hl.dsp.exec_cmd 'hyprlock')
-hl.bind(mainMod .. ' + SHIFT + L', hl.dsp.exec_cmd 'wlogout')
+hl.bind(
+  mainMod .. ' + SHIFT + L',
+  hl.dsp.exec_cmd(scripts .. '/toggle_hypridle.sh')
+)
 hl.bind(
   mainMod .. ' + P',
   hl.dsp.exec_cmd(scripts .. '/cycle_power_profile.sh')

@@ -55,6 +55,6 @@ $env.config.keybindings ++= [{
 # etc.
 mkdir ($nu.data-dir | path join 'vendor/autoload')
 starship init nu | save -f ($nu.data-dir | path join 'vendor/autoload/starship.nu')
-$env.PATH ++= ["~/.ghcup/bin", '~/.cabal/bin']
+path add '~/.ghcup/bin' '~/.cabal/bin' (go env GOBIN)
 source ~/.zoxide.nu
 source ./git-completions.nu

@@ -11,6 +11,7 @@ hl.config {
     touchpad = {
       natural_scroll = false,
       disable_while_typing = true,
+      tap_to_click = false,
     },
     scroll_method = 'on_button_down',
     scroll_button = 274, -- middle mouse button
@@ -24,32 +25,13 @@ hl.gesture {
   action = 'workspace',
 }
 
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
--- These names are found by running `hyprctl devices`
-
--- latitude 7490
-hl.device {
-  name = 'dell081c:00-044e:121f-',
-  sensitivity = 0.2,
-}
-
-hl.device {
-  name = 'dell081c:00-044e:121f-mouse',
-  sensitivity = -0.2,
-}
-
--- thinkpad l14 gen 2
-hl.device {
-  name = 'synps/2-synaptics-touchpad',
-  sensitivity = 0.7,
-}
-
+-- thinkpad touchpad
 hl.device {
   name = 'gxtp5100:00-27c6:01e0-touchpad',
   sensitivity = 0.4,
 }
 
+-- thinkpad trackpoint
 hl.device {
   name = 'tpps/2-elan-trackpoint',
   sensitivity = -0.4,

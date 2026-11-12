@@ -58,9 +58,9 @@ end, { expr = true })
 
 vim.keymap.set('n', '<Leader>x', '<Cmd>bd<CR>', { desc = 'Delete buffer' })
 
-vim.keymap.set('n', '<Leader>rl', function()
+vim.keymap.set('n', '<Leader>rs', function()
   require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/LuaSnip/' }
-end, { desc = '[R]eload [L]uaSnip Snippets' })
+end, { desc = '[R]eload LuaSnip [S]nippets' })
 vim.keymap.set('n', '<Leader>n', function()
   Snacks.notifier.show_history()
 end, { desc = 'Show [N]otification History' })
@@ -75,6 +75,6 @@ vim.api.nvim_create_user_command('ReloadSession', function()
   local tmp = '/tmp/Session.vim'
   vim.cmd('mksession! ' .. tmp .. ' | restart source ' .. tmp)
 end, {})
-vim.keymap.set('n', '<Leader>rs', '<Cmd>ReloadSession<CR>', { desc = '[R]eload Session' })
+vim.keymap.set('n', '<Leader>rr', '<Cmd>ReloadSession<CR>', { desc = '[R]eload Session' })
 
 -- vim: ts=2 sts=2 sw=2 et
