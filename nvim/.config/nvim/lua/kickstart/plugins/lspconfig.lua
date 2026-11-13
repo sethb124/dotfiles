@@ -202,6 +202,12 @@ return {
       },
       nushell = {},
       dafny = {},
+      ['racket-langserver'] = {
+        cmd = { 'racket', '-l', 'racket-langserver' },
+        filetypes = {
+          'racket',
+        },
+      },
     }
 
     -- Ensure the servers and tools above are installed
